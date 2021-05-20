@@ -1,38 +1,81 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Play&display=swap');
+
+body {
+  font-family: 'Play', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.slide-label {
+  display: block;
+  font: 75%/1.5 -apple-system, BlinkMacSystemFont;
+  font-weight: 600;
+  color: #606770;
+}
+
+.slide-input--range {
+  appearance: none;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 100%;
+}
+
+.slide-input--range:active,
+.slide-input--range:focus {
+  background-color: #aac9ff;
+  outline: none;
+}
+
+.slide-input--range::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  display: block;
+  background-color: #8d949e;
+  border-radius: 100%;
+}
+
+.slide-input--range:active::-webkit-slider-thumb,
+.slide-input--range:focus::-webkit-slider-thumb {
+  background-color: #3578e5;
+}
+
+.mb1 {
+  margin-bottom: 1.5rem;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.map-container {
+  height: 800px;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.sidebar {
+  margin: 0 auto;
+}
+
+.map-name {
+  font-family: 'Pacifico', cursive;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.sidebar-lng-ltd {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #ffffff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.closing-text {
+  font-size: 10px;
 }
