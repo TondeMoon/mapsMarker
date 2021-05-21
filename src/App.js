@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import mapboxgl from 'mapbox-gl';
-import * as parkDate from './markerCodes.json';
+import * as placeDate from './markerCodes.json';
 import cat from './images/marker.png';
 import './App.css';
 
@@ -15,7 +15,7 @@ export default function App() {
   const [viewport, setViewport] = useState({
     latitude: 41.012,
     longitude: 28.9933,
-    width: '100%',
+    width: 'fit-to-width',
     height: '70vh',
     zoom: slide,
   });
@@ -36,9 +36,23 @@ export default function App() {
 
   const onUpdate = (e) => {
     setSlide(e.target.value);
+    setViewport({
+      ...viewport,
+      zoom: Number(slide),
+    });
   };
 
-  useEffect(() => {});
+  const centerMap = useCallback(
+    (place) => {
+      setViewport((viewport) => ({
+        ...viewport,
+        zoom: Number(slide),
+        latitude: place.geometry.coordinates[1],
+        longitude: place.geometry.coordinates[0],
+      }));
+    },
+    [setViewport, slide]
+  );
 
   return (
     <div className="map-container">
@@ -55,7 +69,7 @@ export default function App() {
           setViewport(viewport);
         }}
       >
-        {parkDate.features.map((place) => (
+        {placeDate.features.map((place) => (
           <Marker
             key={place.properties.PLACE_ID}
             latitude={place.geometry.coordinates[1]}
@@ -66,6 +80,7 @@ export default function App() {
               onClick={(e) => {
                 e.preventDefault();
                 setSelectedPlace(place);
+                centerMap(place);
               }}
             >
               <img src={cat} alt="Cat Icon" />
@@ -96,9 +111,10 @@ export default function App() {
         <input
           className="slide-input--range"
           list="tickmarks"
-          max={50}
+          min={10}
+          max={20}
           onChange={(e) => onUpdate(e)}
-          step={1}
+          step={0.5}
           type="range"
           value={slide}
         />
